@@ -1,0 +1,33 @@
+{
+  "name": "emojiml",
+  "version": "1.0.0",
+  "description": "PWA that uses machine learning to put emojis in body parts, because ... why not? ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pwa",
+    "emojis",
+    "ml",
+    "tensorflow",
+    "typescript"
+  ],
+  "author": "Javier Rocamora",
+  "license": "ISC",
+  "devDependencies": {
+    "@tensorflow-models/body-pix": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "eslint": "^5.15.3",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.4000",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "webpack": "^4.29.6"
+  }
+}
