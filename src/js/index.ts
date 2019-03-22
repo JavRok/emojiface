@@ -7,6 +7,7 @@ import { MediaAccess } from './MediaAccess';
 
 const video: HTMLVideoElement = document.querySelector('.video');
 const logText = document.getElementById('log');
+const introText = document.querySelector('.intro-text');
 const cameraSwitchBtn: HTMLElement = document.querySelector('.switch-camera');
 
 async function start() {
@@ -14,16 +15,17 @@ async function start() {
         const mediaAccess = new MediaAccess(video);
         const permission = await mediaAccess.getCameraPermission();
         if (!permission) {
-            logToDom('User denied camera use 😒', logText);
+            introText.innerHTML = 'User denied camera use 😒';
             return;
         }
+        introText.innerHTML = 'Now focus on some body parts 💪 👱';
+
         const cameras = await mediaAccess.getCameras();
         if (cameras && cameras.length > 1) {
-            // Enable/show button if permission
             cameraSwitchBtn.addEventListener('click', async evt => {
                 // disable/spin button while waiting
                 video.classList.add('switching');
-                await wait(300);
+                await wait(400);
                 await mediaAccess.selectNextCamera();
                 video.classList.remove('switching');
             });
@@ -33,7 +35,7 @@ async function start() {
         }
     } catch (e) {
         console.log(e);
-        logToDom('exc' + e, logText);
+        logToDom('Error: ' + e, logText);
         video.classList.remove('switching');
     }
 }
