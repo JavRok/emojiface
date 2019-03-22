@@ -1,3 +1,6 @@
+/*
+ * Class to access system cameras
+ */
 import { logToDom } from './helpers';
 
 const logText = document.getElementById('log');
@@ -75,6 +78,9 @@ export class MediaAccess {
             // We can only know the resolution when we pass the stream to the <video> element
             this.videoElem.onloadedmetadata = () => {
                 this.cameraResolution = { width: this.videoElem.videoWidth, height: this.videoElem.videoHeight };
+                this.videoElem.width = this.cameraResolution.width;
+                this.videoElem.height = this.cameraResolution.height;
+                console.log('Camera resolution ' + this.videoElem.width + 'x' + this.videoElem.height);
             };
             return true;
         } catch (err) {
@@ -129,6 +135,9 @@ export class MediaAccess {
             // We can only know the resolution when we pass the stream to the <video> element
             this.videoElem.onloadedmetadata = () => {
                 this.cameraResolution = { width: this.videoElem.videoWidth, height: this.videoElem.videoHeight };
+                this.videoElem.width = this.cameraResolution.width;
+                this.videoElem.height = this.cameraResolution.height;
+                console.log('Camera resolution ' + this.videoElem.width + 'x' + this.videoElem.height);
             };
             return true;
         } catch (err) {

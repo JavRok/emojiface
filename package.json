@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "@tensorflow-models/body-pix": "^1.0.0",
+    "@tensorflow/tfjs": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "css-loader": "^2.1.1",

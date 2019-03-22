@@ -4,8 +4,10 @@ import '../css/main.css';
 import { logToDom, wait } from './helpers';
 
 import { MediaAccess } from './MediaAccess';
+import { BodyDetection } from './BodyDetection';
 
 const video: HTMLVideoElement = document.querySelector('.video');
+const canvas: HTMLCanvasElement = document.getElementById('output') as HTMLCanvasElement;
 const logText = document.getElementById('log');
 const introText = document.querySelector('.intro-text');
 const cameraSwitchBtn: HTMLElement = document.querySelector('.switch-camera');
@@ -18,7 +20,7 @@ async function start() {
             introText.innerHTML = 'User denied camera use 😒';
             return;
         }
-        introText.innerHTML = 'Now focus on some body parts 💪 👱';
+        introText.innerHTML = "Now focus on someone's face 💪 👱";
 
         const cameras = await mediaAccess.getCameras();
         if (cameras && cameras.length > 1) {
@@ -33,8 +35,12 @@ async function start() {
             // Hide button if there's only one camera.
             cameraSwitchBtn.classList.add('hidden');
         }
+
+        await wait(1000);
+        const Bd = new BodyDetection(video, canvas);
+        await Bd.getBodyParts();
     } catch (e) {
-        console.log(e);
+        console.log('Exception', e);
         logToDom('Error: ' + e, logText);
         video.classList.remove('switching');
     }

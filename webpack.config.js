@@ -6,12 +6,13 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
     entry: {
         main: './src/js/index.ts',
+        serviceWorker: './src/js/pwa.js',
     },
     mode: 'development',
     output: {
         path: path.resolve(__dirname, 'public/js'),
         publicPath: '/js/',
-        filename: 'emojibody.js',
+        filename: '[name].js',
     },
     resolve: {
         // Add '.ts' as a resolvable extension.
@@ -35,11 +36,12 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true, // set to true if you want JS source maps
-            }),
+            // For some reason, Uglify is breaking the build
+            // new UglifyJsPlugin({
+            //     cache: true,
+            //     parallel: true,
+            //     sourceMap: true,
+            // }),
             new OptimizeCSSAssetsPlugin({}),
         ],
         splitChunks: {
