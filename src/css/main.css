@@ -10,4 +10,41 @@ body {
 
 .video {
     max-width: 100%;
+    transform: rotate(0deg);
+    transition: transform 0.4s;
+}
+.video.switching {
+    transform: rotateY(90deg);
+}
+
+
+.switch-camera {
+    background: #44c767 url('../img/camera.svg') no-repeat center center;
+    border-radius: 28px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    background-size: 34px 34px;
+    font-size: 1px;
+    text-indent: -999px;
+    padding: 20px 32px;
+    outline: none;
+}
+
+.switch-camera:hover {
+    background-color:#5cbf2a;
+}
+
+.switch-camera:active {
+    position:relative;
+    top:1px;
+}
+
+.switch-camera[disabled] {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.switch-camera[disabled]:hover {
+    background-color: #44c767;
 }

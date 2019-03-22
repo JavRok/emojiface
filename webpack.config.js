@@ -9,7 +9,8 @@ module.exports = {
     },
     mode: 'development',
     output: {
-        path: path.join(__dirname, 'public', 'js'),
+        path: path.resolve(__dirname, 'public/js'),
+        publicPath: '/js/',
         filename: 'emojibody.js',
     },
     resolve: {
@@ -23,36 +24,46 @@ module.exports = {
     ],
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './public/',
+        contentBase: path.join(__dirname, 'public/'),
         publicPath: '/js/',
+        inline: true,
         hot: true,
+        compress: true,
         open: true,
         port: 3001,
-        host: '0.0.0.0',  // Allows access from other devices
+        // host: '0.0.0.0',     // Allows access from other devices
     },
-    // optimization: {
-    //     minimizer: [
-    //         new UglifyJsPlugin({
-    //             cache: true,
-    //             parallel: true,
-    //             sourceMap: true, // set to true if you want JS source maps
-    //         }),
-    //         new OptimizeCSSAssetsPlugin({}),
-    //     ],
-    //     splitChunks: {
-    //         cacheGroups: {
-    //             styles: {
-    //                 name: 'main',
-    //                 test: /\.css$/,
-    //                 chunks: 'all',
-    //                 enforce: true,
-    //             },
-    //         },
-    //     },
-    // },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true, // set to true if you want JS source maps
+            }),
+            new OptimizeCSSAssetsPlugin({}),
+        ],
+        splitChunks: {
+            cacheGroups: {
+                styles: {
+                    name: 'main',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                },
+            },
+        },
+    },
     module: {
         rules: [
             { test: /\.ts$/, loader: 'ts-loader' },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                loader: 'url-loader',
+                options: {
+                    publicPath: './public/',
+                    limit: 10000,
+                },
+            },
             {
                 test: /\.css$/,
                 loaders: [
@@ -64,6 +75,7 @@ module.exports = {
                             publicPath: './public/css',
                         },
                     },
+                    // 'style-loader',
                     'css-loader',
                 ],
             },
